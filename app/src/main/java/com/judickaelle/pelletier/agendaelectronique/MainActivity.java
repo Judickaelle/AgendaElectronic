@@ -18,6 +18,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentActivity;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class MainActivity extends FragmentActivity {
@@ -67,6 +68,8 @@ public class MainActivity extends FragmentActivity {
                 eventList);
         eventListView.setAdapter(adapter);
         instance = this;
+
+       ReadDatabase(calendarView);
 
         calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
@@ -123,7 +126,7 @@ public class MainActivity extends FragmentActivity {
         //cursor = sqLiteDatabase.rawQuery("Select Date, NameEvent from EventCalendar", null);
 
         sqLiteDatabase.insert("EventCalendar", null, contentValues);
-
+        ReadDatabase(calendarView);
 
         /*cursor.moveToFirst();
 
@@ -151,17 +154,15 @@ public class MainActivity extends FragmentActivity {
             cursor = sqLiteDatabase.rawQuery(query, null);
             cursor.moveToFirst(); // faire une boucle pour afficher tout les événements de la journée
 
-            String name ="ah";
-            String time ="hmm";
             while(!cursor.isAfterLast()){
                 if(cursor.getInt(3)==1){
                     eventList.add(cursor.getString(cursor.getColumnIndex("NameEvent"))
-                            + " at "
+                            + "\n"
                             + cursor.getString(2)
                             + " : "
                             //+ cursor.getString(cursor.getColumnIndex("Guest"))
                             + "Family event"
-                    );  //a changer en list view
+                    );
                 }else{
                     eventList.add(cursor.getString(cursor.getColumnIndex("NameEvent"))
                             + " at "
@@ -169,16 +170,13 @@ public class MainActivity extends FragmentActivity {
                             + " : "
                             + cursor.getString(cursor.getColumnIndex("Guest"))
                             //+ ", personal event"
-                    );  //a changer en list view
+                    );
                 }
-
                 cursor.moveToNext();
             }
             eventListView.setAdapter(adapter);
         }catch (Exception e){
             e.printStackTrace();
-            eventList.add("nothing for the moment"); //si pas d'événement dans la journée alors l'affichage est nothing
-            eventListView.setAdapter(adapter);
         }
     }
 }
