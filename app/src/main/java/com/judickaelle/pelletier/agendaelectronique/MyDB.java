@@ -18,12 +18,12 @@ public class MyDB extends SQLiteOpenHelper {
         String script = "CREATE TABLE EventCalendar ";
         script += "( Date TEXT,";
         script += "NameEvent TEXT,";
+        script += "FamilyEvent BOOLEAN,";
         script += "DescriptionEvent TEXT,";
         script += "LocalisationEvent TEXT,";
         script += "Guest TEXT);";
         //Execute script
         db.execSQL(script);
-
     }
 
     @Override

@@ -7,6 +7,10 @@
     <string name="no_event_for_the_moment">no event for the moment</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="save">Save</string>
+    <!-- <string name="save">Save</string> -->
     <string name="add_a_new_event">Add a new event</string>
+    <string name="dialog_continue_insertion">This event is already created, do you want to continue ?</string>
+    <string name="warning_dialog_title">WARNING</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
 </resources>

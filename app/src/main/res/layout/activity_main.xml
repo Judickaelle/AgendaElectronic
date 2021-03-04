@@ -19,17 +19,31 @@
         android:id="@+id/buttonAdd"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="210dp"
+        android:layout_marginTop="350dp"
+        android:text="add apointment" />
+
+    <Button
+        android:id="@+id/buttonAddfullday"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="80dp"
         android:layout_marginTop="350dp"
         android:text="add event" />
 
-
-    <MultiAutoCompleteTextView
-        android:id="@+id/textViewEvent"
+    <ListView
+        android:id="@+id/eventList"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="400dp"
-        android:hint="@string/no_event_for_the_moment"
-        android:text="@string/multiautocompletetextview" />
+        android:layout_marginTop="400dp" />
+
+
+    <!-- <MultiAutoCompleteTextView
+         android:id="@+id/textViewEvent"
+         android:layout_width="match_parent"
+         android:layout_height="match_parent"
+         android:layout_marginTop="400dp"
+         android:hint="@string/no_event_for_the_moment"
+         android:text="@string/multiautocompletetextview" />-->
 
 </RelativeLayout>
