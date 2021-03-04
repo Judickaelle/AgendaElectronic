@@ -2,14 +2,14 @@ com/judickaelle/pelletier/agendaelectronique/Conflit.java
  com.judickaelle.pelletier.agendaelectronique.Conflit
 com/judickaelle/pelletier/agendaelectronique/MyDB.java
  com.judickaelle.pelletier.agendaelectronique.MyDB
-com/judickaelle/pelletier/agendaelectronique/BuildConfig.java
- com.judickaelle.pelletier.agendaelectronique.BuildConfig
-com/judickaelle/pelletier/agendaelectronique/Pop.java
- com.judickaelle.pelletier.agendaelectronique.Pop
 com/judickaelle/pelletier/agendaelectronique/AlertDialogFragment.java
  com.judickaelle.pelletier.agendaelectronique.AlertDialogFragment
  com.judickaelle.pelletier.agendaelectronique.AlertDialogFragment$1
  com.judickaelle.pelletier.agendaelectronique.AlertDialogFragment$2
+com/judickaelle/pelletier/agendaelectronique/BuildConfig.java
+ com.judickaelle.pelletier.agendaelectronique.BuildConfig
+com/judickaelle/pelletier/agendaelectronique/Pop.java
+ com.judickaelle.pelletier.agendaelectronique.Pop
 com/judickaelle/pelletier/agendaelectronique/AddEventActivity.java
  com.judickaelle.pelletier.agendaelectronique.AddEventActivity
 com/judickaelle/pelletier/agendaelectronique/AddEventFullDayActivity.java

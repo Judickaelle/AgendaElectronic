@@ -19,7 +19,7 @@ public class MyDB extends SQLiteOpenHelper {
         script += "( Date TEXT,";
         script += "NameEvent TEXT,";
         script += "FamilyEvent BOOLEAN,";
-        script += "DescriptionEvent TEXT,";
+        script += "TimeEvent TEXT,";
         script += "LocalisationEvent TEXT,";
         script += "Guest TEXT);";
         //Execute script

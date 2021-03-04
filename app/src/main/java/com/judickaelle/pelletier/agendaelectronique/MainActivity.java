@@ -32,7 +32,7 @@ public class MainActivity extends FragmentActivity {
     private SQLiteDatabase sqLiteDatabase;
     private Cursor cursor;
 
-    ArrayList<String> eventList=new ArrayList<String>();
+    ArrayList<String> eventList=new ArrayList<>();
     ArrayAdapter<String> adapter;
 
     //****************** GETTER et SETTER ********************
@@ -49,7 +49,6 @@ public class MainActivity extends FragmentActivity {
         return instance;
     }
 
-    
     //***********************PRINCIPAL CODE*****************************
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,7 +61,7 @@ public class MainActivity extends FragmentActivity {
         Button ButtonAdd = findViewById(R.id.buttonAdd);
         Button ButtonAddfullday = findViewById(R.id.buttonAddfullday);
 
-        adapter = new ArrayAdapter<String>(
+        adapter = new ArrayAdapter<>(
                 this,
                 android.R.layout.simple_list_item_1,
                 eventList);
@@ -121,8 +120,12 @@ public class MainActivity extends FragmentActivity {
 
     //************************INSERTION IN THE DB*******************************
     public void InsertEventDataBase(ContentValues contentValues, String dateToCompare, String nameEventToCompare){
-        cursor = sqLiteDatabase.rawQuery("Select Date, NameEvent from EventCalendar", null);
-        cursor.moveToFirst();
+        //cursor = sqLiteDatabase.rawQuery("Select Date, NameEvent from EventCalendar", null);
+
+        sqLiteDatabase.insert("EventCalendar", null, contentValues);
+
+
+        /*cursor.moveToFirst();
 
         Conflit conflit = new Conflit(false);
 
@@ -138,12 +141,12 @@ public class MainActivity extends FragmentActivity {
 
         if(conflit.isPb() == false){
             sqLiteDatabase.insert("EventCalendar", null, contentValues);
-        }
+        }*/
     }
 
     //************************READ THE DB*****************************
     public void ReadDatabase(View view){
-        String query = "Select NameEvent, Guest, DescriptionEvent, FamilyEvent Desc from EventCalendar where Date =" + selectedDate;
+        String query = "Select NameEvent, Guest, TimeEvent, FamilyEvent Desc from EventCalendar where Date =" + selectedDate;
         try{
             cursor = sqLiteDatabase.rawQuery(query, null);
             cursor.moveToFirst(); // faire une boucle pour afficher tout les événements de la journée
