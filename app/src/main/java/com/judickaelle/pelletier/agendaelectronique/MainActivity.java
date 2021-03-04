@@ -162,8 +162,23 @@ public class MainActivity extends FragmentActivity {
             cursor = sqLiteDatabase.rawQuery(query, null);
             cursor.moveToFirst(); // faire une boucle pour afficher tout les événements de la journée
 
+            String strTodisplay;
+
             while(!cursor.isAfterLast()){
-                if(cursor.getInt(3)==1){
+                if(cursor.getString(3)!=null){
+                    strTodisplay = (cursor.getString(cursor.getColumnIndex("NameEvent"))
+                            + "\n"
+                            + cursor.getString(cursor.getColumnIndex("TimeEvent"))
+                            + "  "
+                            + cursor.getString(cursor.getColumnIndex("Guest")));
+                    if(cursor.getString(cursor.getColumnIndex("FamilyEvent")).equals(false)){
+                        strTodisplay = (strTodisplay + "Family event");
+                    }
+                }else{
+                    strTodisplay = (cursor.getString(cursor.getColumnIndex("NameEvent")));
+                }
+                eventList.add(strTodisplay);
+                /*if(cursor.getInt(3)==1){
                     eventList.add(cursor.getString(cursor.getColumnIndex("NameEvent"))
                             + "\n"
                             + cursor.getString(2)
@@ -179,7 +194,7 @@ public class MainActivity extends FragmentActivity {
                             + cursor.getString(cursor.getColumnIndex("Guest"))
                             //+ ", personal event"
                     );
-                }
+                }*/
                 cursor.moveToNext();
             }
             eventListView.setAdapter(adapter);
