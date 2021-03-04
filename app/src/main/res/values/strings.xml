@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Mon agenda</string>
+    <string name="save">Save</string>
+    <string name="event_name">Event name</string>
+    <string name="add_event_name" />
+    <string name="multiautocompletetextview">MultiAutoCompleteTextView</string>
+    <string name="no_event_for_the_moment">no event for the moment</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="save">Save</string>
+    <string name="add_a_new_event">Add a new event</string>
+</resources>

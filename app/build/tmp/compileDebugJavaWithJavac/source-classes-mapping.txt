@@ -1,0 +1,7 @@
+com/judickaelle/pelletier/agendaelectronique/BuildConfig.java
+ com.judickaelle.pelletier.agendaelectronique.BuildConfig
+com/judickaelle/pelletier/agendaelectronique/MyDB.java
+ com.judickaelle.pelletier.agendaelectronique.MyDB
+com/judickaelle/pelletier/agendaelectronique/MainActivity.java
+ com.judickaelle.pelletier.agendaelectronique.MainActivity
+ com.judickaelle.pelletier.agendaelectronique.MainActivity$1
