@@ -5,6 +5,7 @@ import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -15,11 +16,16 @@ import android.widget.CalendarView;
 import android.widget.ListView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentActivity;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 public class MainActivity extends FragmentActivity {
 
@@ -40,9 +46,7 @@ public class MainActivity extends FragmentActivity {
     public static String getSelectedDate() {
         return selectedDate;
     }
-    public void setSelectedDate(String selectedDate) {
-        this.selectedDate = selectedDate;
-    }
+    public void setSelectedDate(String selectedDate) {this.selectedDate = selectedDate;}
     public String getEventSelectedDesc() {
         return eventSelectedDesc;
     }
@@ -69,19 +73,25 @@ public class MainActivity extends FragmentActivity {
         eventListView.setAdapter(adapter);
         instance = this;
 
-       ReadDatabase(calendarView);
+        Date today = Calendar.getInstance().getTime();
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd");
+        String strToday = dateFormat.format(today);
+        setSelectedDate(strToday);
+
+        ReadDatabase(calendarView);
 
         calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
+            @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onSelectedDayChange(CalendarView view, int year, int month, int dayOfMonth) {
                 eventList.clear();
-                selectedDate = Integer.toString(year) + Integer.toString(month) + Integer.toString(dayOfMonth);
+                setSelectedDate(LocalDate.of(year, month+1, dayOfMonth).toString());
                 ReadDatabase(view);
             }
         });
 
         try{
-            dbCalendar = new MyDB(this, "CalendarDatabase", null, 1); //initialisation de la BDD
+            dbCalendar = new MyDB(this, "CalendarDatabase", null, 1); //DB initialisation
             sqLiteDatabase = dbCalendar.getWritableDatabase();
         }catch(Exception e){
             e.printStackTrace();
@@ -125,13 +135,15 @@ public class MainActivity extends FragmentActivity {
     public void InsertEventDataBase(ContentValues contentValues, String dateToCompare, String nameEventToCompare){
         //cursor = sqLiteDatabase.rawQuery("Select Date, NameEvent from EventCalendar", null);
 
-        sqLiteDatabase.insert("EventCalendar", null, contentValues);
+        Conflit conflit = new Conflit(false);
+        //showDialog();
+        //sqLiteDatabase.insert("EventCalendar", null, contentValues);
+        if(conflit.isPb() == false){
+            sqLiteDatabase.insert("EventCalendar", null, contentValues);
+        }
         ReadDatabase(calendarView);
 
         /*cursor.moveToFirst();
-
-        Conflit conflit = new Conflit(false);
-
         while(!cursor.isAfterLast()){
             //String eventNOM = cursor.getString((cursor.getColumnIndex("NameEvent")));
             if(cursor.getString((cursor.getColumnIndex("Date"))).equals(dateToCompare)&& cursor.getString(1).equals(nameEventToCompare)) {
@@ -140,10 +152,6 @@ public class MainActivity extends FragmentActivity {
                   //  break;
            }
             cursor.moveToNext();
-        }
-
-        if(conflit.isPb() == false){
-            sqLiteDatabase.insert("EventCalendar", null, contentValues);
         }*/
     }
 
