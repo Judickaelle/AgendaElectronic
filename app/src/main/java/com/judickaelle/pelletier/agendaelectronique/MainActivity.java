@@ -73,10 +73,11 @@ public class MainActivity extends FragmentActivity {
         eventListView.setAdapter(adapter);
         instance = this;
 
-        Date today = Calendar.getInstance().getTime();
+        //****************************DATE FORMAT**********************
+        /*Date today = Calendar.getInstance().getTime();
         DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd");
         String strToday = dateFormat.format(today);
-        setSelectedDate(strToday);
+        setSelectedDate(strToday);*/
 
         ReadDatabase(calendarView);
 
@@ -85,7 +86,8 @@ public class MainActivity extends FragmentActivity {
             @Override
             public void onSelectedDayChange(CalendarView view, int year, int month, int dayOfMonth) {
                 eventList.clear();
-                setSelectedDate(LocalDate.of(year, month+1, dayOfMonth).toString());
+                setSelectedDate(Integer.toString(year) + Integer.toString(month) + Integer.toString(dayOfMonth));
+                //setSelectedDate(dateFormat.format(LocalDate.of(year, month+1, dayOfMonth).toString())); //problem with this format; need to be corrected
                 ReadDatabase(view);
             }
         });
@@ -138,9 +140,9 @@ public class MainActivity extends FragmentActivity {
         Conflit conflit = new Conflit(false);
         //showDialog();
         //sqLiteDatabase.insert("EventCalendar", null, contentValues);
-        if(conflit.isPb() == false){
+        //if(conflit.isPb() == false){
             sqLiteDatabase.insert("EventCalendar", null, contentValues);
-        }
+       // }
         ReadDatabase(calendarView);
 
         /*cursor.moveToFirst();
@@ -157,7 +159,7 @@ public class MainActivity extends FragmentActivity {
 
     //************************READ THE DB*****************************
     public void ReadDatabase(View view){
-        String query = "Select NameEvent, Guest, TimeEvent, FamilyEvent Desc from EventCalendar where Date =" + selectedDate;
+        String query = "Select NameEvent, Guest, TimeEvent, FamilyEvent Desc from EventCalendar where Date =" + getSelectedDate();
         try{
             cursor = sqLiteDatabase.rawQuery(query, null);
             cursor.moveToFirst(); // faire une boucle pour afficher tout les événements de la journée
@@ -165,36 +167,23 @@ public class MainActivity extends FragmentActivity {
             String strTodisplay;
 
             while(!cursor.isAfterLast()){
-                if(cursor.getString(3)!=null){
+                if(cursor.getInt(3)==1){
                     strTodisplay = (cursor.getString(cursor.getColumnIndex("NameEvent"))
                             + "\n"
                             + cursor.getString(cursor.getColumnIndex("TimeEvent"))
                             + "  "
-                            + cursor.getString(cursor.getColumnIndex("Guest")));
-                    if(cursor.getString(cursor.getColumnIndex("FamilyEvent")).equals(false)){
-                        strTodisplay = (strTodisplay + "Family event");
-                    }
-                }else{
-                    strTodisplay = (cursor.getString(cursor.getColumnIndex("NameEvent")));
-                }
-                eventList.add(strTodisplay);
-                /*if(cursor.getInt(3)==1){
-                    eventList.add(cursor.getString(cursor.getColumnIndex("NameEvent"))
-                            + "\n"
-                            + cursor.getString(2)
-                            + " : "
+                            + cursor.getString(cursor.getColumnIndex("Guest"))
                             //+ cursor.getString(cursor.getColumnIndex("Guest"))
-                            + "Family event"
-                    );
+                            + "Family event");
+                    eventList.add(strTodisplay);
                 }else{
-                    eventList.add(cursor.getString(cursor.getColumnIndex("NameEvent"))
+                    strTodisplay = (cursor.getString(cursor.getColumnIndex("NameEvent"))
                             + " at "
                             + cursor.getString(2)
                             + " : "
-                            + cursor.getString(cursor.getColumnIndex("Guest"))
-                            //+ ", personal event"
-                    );
-                }*/
+                            + cursor.getString(cursor.getColumnIndex("Guest")));
+                    eventList.add(strTodisplay);
+                }
                 cursor.moveToNext();
             }
             eventListView.setAdapter(adapter);
