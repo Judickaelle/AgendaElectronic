@@ -103,7 +103,11 @@ public class MainActivity extends FragmentActivity {
         ButtonAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, AddEventActivity.class));
+                Conflit conflit = new Conflit(true);
+                showDialog(); //test de la fonctionnalité de conflit
+                if(conflit.isPb() == false) {
+                    startActivity(new Intent(MainActivity.this, AddEventActivity.class));
+                }
             }
         });
 
@@ -137,12 +141,11 @@ public class MainActivity extends FragmentActivity {
     public void InsertEventDataBase(ContentValues contentValues, String dateToCompare, String nameEventToCompare){
         //cursor = sqLiteDatabase.rawQuery("Select Date, NameEvent from EventCalendar", null);
 
-        Conflit conflit = new Conflit(false);
+        Conflit conflit = new Conflit(true);
         //showDialog();
-        //sqLiteDatabase.insert("EventCalendar", null, contentValues);
-        //if(conflit.isPb() == false){
+        if(conflit.isPb() == false){
             sqLiteDatabase.insert("EventCalendar", null, contentValues);
-       // }
+        }
         ReadDatabase(calendarView);
 
         /*cursor.moveToFirst();
