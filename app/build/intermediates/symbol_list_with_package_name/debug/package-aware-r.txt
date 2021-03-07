@@ -1853,6 +1853,7 @@ id easeOut
 id editTextEventName
 id editTextPeople
 id editTextTime
+id editTextTime_min
 id edit_query
 id elastic
 id end
@@ -2041,7 +2042,6 @@ id snackbar_text
 id snap
 id snapMargins
 id spacer
-id spinner
 id spline
 id split_action_bar
 id spread
@@ -2084,6 +2084,7 @@ id textStart
 id textTop
 id textView2
 id textViewDate
+id textViewDoublePoint
 id textViewName
 id textViewPeople
 id text_input_end_icon

@@ -12,8 +12,6 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 
 public class Pop extends Activity {
-
-
     TextView tEvent;
     TextView tNameEvent;
     TextView tTimeEvent;
@@ -44,18 +42,14 @@ public class Pop extends Activity {
 
         event = MainActivity.getInstance().getEventSelectedDesc();
 
-
         nameEventPop = event.split("at")[0];
         timeEventPop = event.split("at")[1].split(" : ")[0];
         peopleEventPop = event.split("at")[1].split(" : ")[1];
-
 
         tEvent.setText(event);
 
         tTimeEvent.setText(timeEventPop);
         tNameEvent.setText(nameEventPop);
         tPeopleEvent.setText(peopleEventPop);
-
     }
-
 }

@@ -15,7 +15,6 @@ public class AddEventActivity extends Activity {
     private EditText editTextTime;
     private EditText editTextTime_min;
     private EditText editTextPeople;
-    private Button buttonSave;
     private boolean familyEvent = false;
 
     private static String NameEvent;
@@ -34,26 +33,28 @@ public class AddEventActivity extends Activity {
         editTextTime = findViewById(R.id.editTextTime);
         editTextTime_min = findViewById(R.id.editTextTime_min);
         editTextPeople = findViewById(R.id.editTextPeople);
-
-        buttonSave = findViewById(R.id.buttonSave);
     }
     // ***************** GETTER et SETTER ********************
     public static String getNameEvent() {
         return NameEvent;
     }
-    public void setNameEvent(String NameEvent) {this.NameEvent = NameEvent;}
+    public void setNameEvent(String NameEvent) {
+        AddEventActivity.NameEvent = NameEvent;}
     public static String getPeople() {
         return People;
     }
-    public void setPeople(String People) {this.People = People;}
+    public void setPeople(String People) {
+        AddEventActivity.People = People;}
     public static String getTimeEvent() {
         return TimeEvent;
     }
-    public void setTimeEvent(String TimeEvent) {this.TimeEvent = TimeEvent;}
+    public void setTimeEvent(String TimeEvent) {
+        AddEventActivity.TimeEvent = TimeEvent;}
     public static String getDateEvent() {
         return DateEvent;
     }
-    public void setDateEvent(String DateEvent) {this.DateEvent = DateEvent;}
+    public void setDateEvent(String DateEvent) {
+        AddEventActivity.DateEvent = DateEvent;}
 
     public void InsertDatabase(View view){
 
@@ -70,7 +71,6 @@ public class AddEventActivity extends Activity {
 
         contentValues.put("FamilyEvent", familyEvent);
 
-        //appeler fonction test
         MainActivity.getInstance().InsertEventDataBase(contentValues,getDateEvent(),getNameEvent(), getTimeEvent());
 
         finish();

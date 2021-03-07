@@ -11,19 +11,16 @@ public class Conflit {
         return pb;
     }
 
-    public static void setPb(boolean pb) {
-        Conflit.pb = pb;
-    }
+    public static void setPb(boolean pb) {Conflit.pb = pb;    }
 
-    public Conflit(boolean pb) {
-        pb = false;
-    }
+    public Conflit(boolean pb){
+        Conflit.pb = pb;}
 
     public static void doPositiveClick() {
         pb = false;
     }
 
-    public void doNegativeClick() {
+    public static void doNegativeClick() {
         pb = true;
     }
 

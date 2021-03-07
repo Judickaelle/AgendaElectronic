@@ -25,35 +25,34 @@
 17-->D:\Documents\esaip\cycle_inge\ir_4\information_technology\Developpement_android\projet final\app\src\main\AndroidManifest.xml:9:9-54
 18        android:supportsRtl="true"
 18-->D:\Documents\esaip\cycle_inge\ir_4\information_technology\Developpement_android\projet final\app\src\main\AndroidManifest.xml:10:9-35
-19        android:testOnly="true"
-20        android:theme="@style/Theme.AgendaElectronique" >
-20-->D:\Documents\esaip\cycle_inge\ir_4\information_technology\Developpement_android\projet final\app\src\main\AndroidManifest.xml:11:9-56
-21        <activity android:name="com.judickaelle.pelletier.agendaelectronique.AddEventFullDayActivity" />
-21-->D:\Documents\esaip\cycle_inge\ir_4\information_technology\Developpement_android\projet final\app\src\main\AndroidManifest.xml:12:9-70
-21-->D:\Documents\esaip\cycle_inge\ir_4\information_technology\Developpement_android\projet final\app\src\main\AndroidManifest.xml:12:19-58
-22        <activity android:name="com.judickaelle.pelletier.agendaelectronique.MainActivity" >
-22-->D:\Documents\esaip\cycle_inge\ir_4\information_technology\Developpement_android\projet final\app\src\main\AndroidManifest.xml:13:9-19:20
-22-->D:\Documents\esaip\cycle_inge\ir_4\information_technology\Developpement_android\projet final\app\src\main\AndroidManifest.xml:13:19-47
-23            <intent-filter>
-23-->D:\Documents\esaip\cycle_inge\ir_4\information_technology\Developpement_android\projet final\app\src\main\AndroidManifest.xml:14:13-18:29
-24                <action android:name="android.intent.action.MAIN" />
-24-->D:\Documents\esaip\cycle_inge\ir_4\information_technology\Developpement_android\projet final\app\src\main\AndroidManifest.xml:15:17-69
-24-->D:\Documents\esaip\cycle_inge\ir_4\information_technology\Developpement_android\projet final\app\src\main\AndroidManifest.xml:15:25-66
-25
-26                <category android:name="android.intent.category.LAUNCHER" />
-26-->D:\Documents\esaip\cycle_inge\ir_4\information_technology\Developpement_android\projet final\app\src\main\AndroidManifest.xml:17:17-77
-26-->D:\Documents\esaip\cycle_inge\ir_4\information_technology\Developpement_android\projet final\app\src\main\AndroidManifest.xml:17:27-74
-27            </intent-filter>
-28        </activity>
-29        <activity android:name="com.judickaelle.pelletier.agendaelectronique.AddEventActivity" />
-29-->D:\Documents\esaip\cycle_inge\ir_4\information_technology\Developpement_android\projet final\app\src\main\AndroidManifest.xml:20:9-54
-29-->D:\Documents\esaip\cycle_inge\ir_4\information_technology\Developpement_android\projet final\app\src\main\AndroidManifest.xml:20:19-51
-30        <activity
-30-->D:\Documents\esaip\cycle_inge\ir_4\information_technology\Developpement_android\projet final\app\src\main\AndroidManifest.xml:21:9-23:59
-31            android:name="com.judickaelle.pelletier.agendaelectronique.Pop"
-31-->D:\Documents\esaip\cycle_inge\ir_4\information_technology\Developpement_android\projet final\app\src\main\AndroidManifest.xml:22:13-32
-32            android:theme="@style/Theme.Popup" />
-32-->D:\Documents\esaip\cycle_inge\ir_4\information_technology\Developpement_android\projet final\app\src\main\AndroidManifest.xml:23:13-47
-33    </application>
-34
-35</manifest>
+19        android:theme="@style/Theme.AgendaElectronique" >
+19-->D:\Documents\esaip\cycle_inge\ir_4\information_technology\Developpement_android\projet final\app\src\main\AndroidManifest.xml:11:9-56
+20        <activity android:name="com.judickaelle.pelletier.agendaelectronique.AddEventFullDayActivity" />
+20-->D:\Documents\esaip\cycle_inge\ir_4\information_technology\Developpement_android\projet final\app\src\main\AndroidManifest.xml:12:9-70
+20-->D:\Documents\esaip\cycle_inge\ir_4\information_technology\Developpement_android\projet final\app\src\main\AndroidManifest.xml:12:19-58
+21        <activity android:name="com.judickaelle.pelletier.agendaelectronique.MainActivity" >
+21-->D:\Documents\esaip\cycle_inge\ir_4\information_technology\Developpement_android\projet final\app\src\main\AndroidManifest.xml:13:9-19:20
+21-->D:\Documents\esaip\cycle_inge\ir_4\information_technology\Developpement_android\projet final\app\src\main\AndroidManifest.xml:13:19-47
+22            <intent-filter>
+22-->D:\Documents\esaip\cycle_inge\ir_4\information_technology\Developpement_android\projet final\app\src\main\AndroidManifest.xml:14:13-18:29
+23                <action android:name="android.intent.action.MAIN" />
+23-->D:\Documents\esaip\cycle_inge\ir_4\information_technology\Developpement_android\projet final\app\src\main\AndroidManifest.xml:15:17-69
+23-->D:\Documents\esaip\cycle_inge\ir_4\information_technology\Developpement_android\projet final\app\src\main\AndroidManifest.xml:15:25-66
+24
+25                <category android:name="android.intent.category.LAUNCHER" />
+25-->D:\Documents\esaip\cycle_inge\ir_4\information_technology\Developpement_android\projet final\app\src\main\AndroidManifest.xml:17:17-77
+25-->D:\Documents\esaip\cycle_inge\ir_4\information_technology\Developpement_android\projet final\app\src\main\AndroidManifest.xml:17:27-74
+26            </intent-filter>
+27        </activity>
+28        <activity android:name="com.judickaelle.pelletier.agendaelectronique.AddEventActivity" />
+28-->D:\Documents\esaip\cycle_inge\ir_4\information_technology\Developpement_android\projet final\app\src\main\AndroidManifest.xml:20:9-54
+28-->D:\Documents\esaip\cycle_inge\ir_4\information_technology\Developpement_android\projet final\app\src\main\AndroidManifest.xml:20:19-51
+29        <activity
+29-->D:\Documents\esaip\cycle_inge\ir_4\information_technology\Developpement_android\projet final\app\src\main\AndroidManifest.xml:21:9-23:59
+30            android:name="com.judickaelle.pelletier.agendaelectronique.Pop"
+30-->D:\Documents\esaip\cycle_inge\ir_4\information_technology\Developpement_android\projet final\app\src\main\AndroidManifest.xml:22:13-32
+31            android:theme="@style/Theme.Popup" />
+31-->D:\Documents\esaip\cycle_inge\ir_4\information_technology\Developpement_android\projet final\app\src\main\AndroidManifest.xml:23:13-47
+32    </application>
+33
+34</manifest>

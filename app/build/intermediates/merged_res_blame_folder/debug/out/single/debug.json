@@ -8,12 +8,12 @@
         "source": "D:\\Documents\\esaip\\cycle_inge\\ir_4\\information_technology\\Developpement_android\\projet final\\app\\src\\main\\res\\mipmap-mdpi\\ic_launcher_round.png"
     },
     {
-        "merged": "D:\\Documents\\esaip\\cycle_inge\\ir_4\\information_technology\\Developpement_android\\projet final\\app\\build\\intermediates\\res\\merged\\debug\\layout_popup_info.xml.flat",
-        "source": "D:\\Documents\\esaip\\cycle_inge\\ir_4\\information_technology\\Developpement_android\\projet final\\app\\src\\main\\res\\layout\\popup_info.xml"
-    },
-    {
         "merged": "D:\\Documents\\esaip\\cycle_inge\\ir_4\\information_technology\\Developpement_android\\projet final\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xhdpi_ic_launcher_round.png.flat",
         "source": "D:\\Documents\\esaip\\cycle_inge\\ir_4\\information_technology\\Developpement_android\\projet final\\app\\src\\main\\res\\mipmap-xhdpi\\ic_launcher_round.png"
+    },
+    {
+        "merged": "D:\\Documents\\esaip\\cycle_inge\\ir_4\\information_technology\\Developpement_android\\projet final\\app\\build\\intermediates\\res\\merged\\debug\\layout_popup_info.xml.flat",
+        "source": "D:\\Documents\\esaip\\cycle_inge\\ir_4\\information_technology\\Developpement_android\\projet final\\app\\src\\main\\res\\layout\\popup_info.xml"
     },
     {
         "merged": "D:\\Documents\\esaip\\cycle_inge\\ir_4\\information_technology\\Developpement_android\\projet final\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xhdpi_ic_launcher.png.flat",
