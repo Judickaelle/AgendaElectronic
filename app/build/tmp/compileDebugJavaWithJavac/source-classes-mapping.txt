@@ -1,20 +1,18 @@
 com/judickaelle/pelletier/agendaelectronique/Conflit.java
  com.judickaelle.pelletier.agendaelectronique.Conflit
-com/judickaelle/pelletier/agendaelectronique/Pop.java
- com.judickaelle.pelletier.agendaelectronique.Pop
-com/judickaelle/pelletier/agendaelectronique/AlertDialogFragment.java
- com.judickaelle.pelletier.agendaelectronique.AlertDialogFragment
-com/judickaelle/pelletier/agendaelectronique/AddEventActivity.java
- com.judickaelle.pelletier.agendaelectronique.AddEventActivity
-com/judickaelle/pelletier/agendaelectronique/AddEventFullDayActivity.java
- com.judickaelle.pelletier.agendaelectronique.AddEventFullDayActivity
-com/judickaelle/pelletier/agendaelectronique/BuildConfig.java
- com.judickaelle.pelletier.agendaelectronique.BuildConfig
-com/judickaelle/pelletier/agendaelectronique/MainActivity.java
- com.judickaelle.pelletier.agendaelectronique.MainActivity
- com.judickaelle.pelletier.agendaelectronique.MainActivity$1
- com.judickaelle.pelletier.agendaelectronique.MainActivity$2
- com.judickaelle.pelletier.agendaelectronique.MainActivity$3
- com.judickaelle.pelletier.agendaelectronique.MainActivity$4
 com/judickaelle/pelletier/agendaelectronique/MyDB.java
  com.judickaelle.pelletier.agendaelectronique.MyDB
+com/judickaelle/pelletier/agendaelectronique/AlertDialogFragment.java
+ com.judickaelle.pelletier.agendaelectronique.AlertDialogFragment
+com/judickaelle/pelletier/agendaelectronique/BuildConfig.java
+ com.judickaelle.pelletier.agendaelectronique.BuildConfig
+com/judickaelle/pelletier/agendaelectronique/Pop.java
+ com.judickaelle.pelletier.agendaelectronique.Pop
+com/judickaelle/pelletier/agendaelectronique/AddEventActivity.java
+ com.judickaelle.pelletier.agendaelectronique.AddEventActivity
+ com.judickaelle.pelletier.agendaelectronique.AddEventActivity$1
+ com.judickaelle.pelletier.agendaelectronique.AddEventActivity$2
+com/judickaelle/pelletier/agendaelectronique/AddEventFullDayActivity.java
+ com.judickaelle.pelletier.agendaelectronique.AddEventFullDayActivity
+com/judickaelle/pelletier/agendaelectronique/MainActivity.java
+ com.judickaelle.pelletier.agendaelectronique.MainActivity

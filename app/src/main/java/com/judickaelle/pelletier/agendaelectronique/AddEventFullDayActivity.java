@@ -13,6 +13,7 @@ public class AddEventFullDayActivity extends AppCompatActivity {
     private EditText editTextNameEvent;
     private static String NameEvent;
     private static String DateEvent;
+    private boolean familyEvent = false;
 
 
     @Override
@@ -40,10 +41,14 @@ public class AddEventFullDayActivity extends AppCompatActivity {
         ContentValues contentValues = new ContentValues();
         contentValues.put("Date", getDateEvent());
         contentValues.put("NameEvent", getNameEvent());
+        contentValues.put("FamilyEvent", familyEvent);
 
         MainActivity.getInstance().InsertEventDataBase(contentValues,getDateEvent(),getNameEvent(), "NoTime");
 
         finish();
     }
 
+    public void onCheckboxClicked(View view){
+        familyEvent = true;
+    }
 }

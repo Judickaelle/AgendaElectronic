@@ -1698,6 +1698,8 @@ id FUNCTION
 id META
 id NO_DEBUG
 id NameEvent
+id NumberPickerHour
+id NumberPickerMinute
 id PeopleEvent
 id PopupLayout
 id SHIFT
@@ -1852,8 +1854,6 @@ id easeInOut
 id easeOut
 id editTextEventName
 id editTextPeople
-id editTextTime
-id editTextTime_min
 id edit_query
 id elastic
 id end
@@ -2083,7 +2083,6 @@ id textSpacerNoTitle
 id textStart
 id textTop
 id textView2
-id textViewDate
 id textViewDoublePoint
 id textViewName
 id textViewPeople

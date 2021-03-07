@@ -36,6 +36,15 @@
         android:importantForAutofill="no"
         android:inputType="textMultiLine" />
 
+    <CheckBox
+        android:id="@+id/checkBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="230dp"
+        android:layout_gravity="center_horizontal"
+        android:text="Family event"
+        android:onClick="onCheckboxClicked"/>
+
     <Button
         android:id="@+id/buttonSave"
         android:layout_width="wrap_content"

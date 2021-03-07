@@ -161,7 +161,7 @@ public class MainActivity extends FragmentActivity {
                             + "\n"
                             + " at "
                             + cursor.getString(2)
-                            + " : "
+                            + " for "
                             + "Family event"
                     );
                 }else{
@@ -170,7 +170,7 @@ public class MainActivity extends FragmentActivity {
                                     + "\n"
                                     + "at "
                                     + cursor.getString(2)
-                                    + " : "
+                                    + " for "
                                     + cursor.getString(cursor.getColumnIndex("Guest"))
                     );
                 }
