@@ -8,6 +8,7 @@ import android.os.Bundle;
 import androidx.fragment.app.DialogFragment;
 
 public class AlertDialogFragment extends DialogFragment {
+
     static AlertDialogFragment newInstance(int title ) {
         AlertDialogFragment frag = new AlertDialogFragment();
         Bundle args = new Bundle();
@@ -24,17 +25,19 @@ public class AlertDialogFragment extends DialogFragment {
                 .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        Conflit.doPositiveClick();
+                        MainActivity.conflit.doPositiveClick();
                         dialog.dismiss();
                     }
                 })
                 .setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        Conflit.doNegativeClick();
+                        //dialog.cancel();
                         dialog.dismiss();
                     }
                 });
+        builder.show();
+        //create the alertDialog object and return it
         return builder.create();
     }
 }

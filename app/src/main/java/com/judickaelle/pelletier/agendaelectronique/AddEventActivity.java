@@ -9,12 +9,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-import java.util.Date;
-
 public class AddEventActivity extends Activity {
 
     private EditText editTextNameEvent;
     private EditText editTextTime;
+    private EditText editTextTime_min;
     private EditText editTextPeople;
     private Button buttonSave;
     private boolean familyEvent = false;
@@ -24,6 +23,8 @@ public class AddEventActivity extends Activity {
     private static String TimeEvent;
     private static String DateEvent;
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,11 +32,11 @@ public class AddEventActivity extends Activity {
 
         editTextNameEvent = findViewById(R.id.editTextEventName);
         editTextTime = findViewById(R.id.editTextTime);
+        editTextTime_min = findViewById(R.id.editTextTime_min);
         editTextPeople = findViewById(R.id.editTextPeople);
 
         buttonSave = findViewById(R.id.buttonSave);
     }
-
     // ***************** GETTER et SETTER ********************
     public static String getNameEvent() {
         return NameEvent;
@@ -54,27 +55,28 @@ public class AddEventActivity extends Activity {
     }
     public void setDateEvent(String DateEvent) {this.DateEvent = DateEvent;}
 
-    public void onCheckboxClicked(View view){
-        familyEvent = true;
-    }
-
     public void InsertDatabase(View view){
 
         setNameEvent(editTextNameEvent.getText().toString());
         setPeople(editTextPeople.getText().toString());
-        setTimeEvent(editTextTime.getText().toString());
+        setTimeEvent(editTextTime.getText().toString() + ":" + editTextTime_min.getText().toString() );
         setDateEvent(MainActivity.getSelectedDate());
 
         ContentValues contentValues = new ContentValues();
         contentValues.put("Date", getDateEvent());
         contentValues.put("NameEvent", getNameEvent());
         contentValues.put("Guest", getPeople());
-        contentValues.put("TimeEvent", getTimeEvent());
+        contentValues.put("DescriptionEvent", getTimeEvent());
 
         contentValues.put("FamilyEvent", familyEvent);
 
-        MainActivity.getInstance().InsertEventDataBase(contentValues,getDateEvent(),getNameEvent());
+        //appeler fonction test
+        MainActivity.getInstance().InsertEventDataBase(contentValues,getDateEvent(),getNameEvent(), getTimeEvent());
+
         finish();
     }
 
+    public void onCheckboxClicked(View view){
+        familyEvent = true;
+    }
 }

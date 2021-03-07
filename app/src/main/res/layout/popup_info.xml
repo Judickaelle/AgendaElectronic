@@ -4,7 +4,7 @@
     android:id="@+id/PopupLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#6300ED">
+    android:background="#B179FF">
 
     <TextView
         android:id="@+id/textView2"
@@ -51,8 +51,4 @@
         android:text="TextView"
         android:textSize="18sp" />
 
-    <Spinner
-        android:id="@+id/spinner"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
 </RelativeLayout>

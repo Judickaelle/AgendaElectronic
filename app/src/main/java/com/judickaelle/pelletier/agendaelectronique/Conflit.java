@@ -10,15 +10,21 @@ public class Conflit {
     public static boolean isPb() {
         return pb;
     }
+
     public static void setPb(boolean pb) {
         Conflit.pb = pb;
     }
 
-    public Conflit(boolean pb) {this.setPb(pb);}
+    public Conflit(boolean pb) {
+        pb = false;
+    }
 
-    public static void doPositiveClick() {setPb(false);}
+    public static void doPositiveClick() {
+        pb = false;
+    }
 
-    public static void doNegativeClick() {setPb(true);}
-
+    public void doNegativeClick() {
+        pb = true;
+    }
 
 }

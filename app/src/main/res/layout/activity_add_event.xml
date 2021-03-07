@@ -15,6 +15,7 @@
         android:text="Add a new appointment"
         android:textSize="30sp"
         android:textStyle="bold" />
+
     <TextView
         android:id="@+id/textViewName"
         android:layout_width="wrap_content"
@@ -42,16 +43,35 @@
         android:layout_marginTop="180dp"
         android:text="What time ?" />
 
+    <TextView
+        android:id="@+id/textViewDoublePoint"
+        android:layout_width="21dp"
+        android:layout_height="32dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="210dp"
+        android:text=" : " />
+
     <EditText
         android:id="@+id/editTextTime"
-        android:layout_width="match_parent"
+        android:layout_width="78dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="200dp"
         android:backgroundTint="#00FFF7"
         android:ems="10"
-        android:hint="@string/add_event_name"
-        android:importantForAutofill="no"
-        android:inputType="textMultiLine" />
+        android:inputType="number"
+        android:translationX="100dp" />
+
+    <EditText
+        android:id="@+id/editTextTime_min"
+        android:layout_width="69dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:layout_marginTop="200dp"
+        android:backgroundTint="#00FFF7"
+        android:ems="10"
+        android:inputType="number"
+        android:textAllCaps="false"
+        android:translationX="-100dp" />
 
     <TextView
         android:id="@+id/textViewPeople"

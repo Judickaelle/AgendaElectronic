@@ -12,18 +12,11 @@ public class AddEventFullDayActivity extends AppCompatActivity {
 
     private EditText editTextNameEvent;
     private Button buttonSave;
+
+
     private static String NameEvent;
     private static String DateEvent;
 
-    //****************** GETTER et SETTER ********************
-    public static String getNameEvent() {
-        return NameEvent;
-    }
-    public void setNameEvent(String NameEvent) {this.NameEvent = NameEvent;}
-    public static String getDateEvent() {
-        return DateEvent;
-    }
-    public void setDateEvent(String DateEvent) {this.DateEvent = DateEvent;}
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,15 +28,32 @@ public class AddEventFullDayActivity extends AppCompatActivity {
         buttonSave = findViewById(R.id.buttonSave);
     }
 
+    public static String getNameEvent() {
+        return NameEvent;
+    }
+
+    public void setNameEvent(String NameEvent) {this.NameEvent = NameEvent;}
+
+    public static String getDateEvent() {
+        return DateEvent;
+    }
+
+    public void setDateEvent(String DateEvent) {this.DateEvent = DateEvent;}
+
     public void InsertDatabase(View view){
+
         setNameEvent(editTextNameEvent.getText().toString());
+
         setDateEvent(MainActivity.getSelectedDate());
 
         ContentValues contentValues = new ContentValues();
         contentValues.put("Date", getDateEvent());
-        contentValues.put("NameEvent", getNameEvent());
+        contentValues.put("NameEvent", getNameEvent());                 // + " at " + editTextTime.getText() + " : " + editTextPeople.getText());
 
-        MainActivity.getInstance().InsertEventDataBase(contentValues,getDateEvent(),getNameEvent());
+        //appeler fonction test
+
+        MainActivity.getInstance().InsertEventDataBase(contentValues,getDateEvent(),getNameEvent(), "NoTime");
+
         finish();
     }
 

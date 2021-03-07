@@ -5,7 +5,6 @@ import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -16,22 +15,21 @@ import android.widget.CalendarView;
 import android.widget.ListView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.RequiresApi;
 import androidx.fragment.app.DialogFragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentTransaction;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 
 public class MainActivity extends FragmentActivity {
 
     private static MainActivity instance;
+
     private static String eventSelectedDesc;
     private static String selectedDate;
+
+    public static Conflit conflit = new Conflit(false);
 
     private MyDB dbCalendar;
     private CalendarView calendarView;
@@ -50,8 +48,15 @@ public class MainActivity extends FragmentActivity {
     public String getEventSelectedDesc() {
         return eventSelectedDesc;
     }
+
     public static MainActivity getInstance() {
         return instance;
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        outState.putString("WORKAROUND_FOR_BUG_19917_KEY", "WORKAROUND_FOR_BUG_19917_VALUE");
+        super.onSaveInstanceState(outState);
     }
 
     //***********************PRINCIPAL CODE*****************************
@@ -73,46 +78,34 @@ public class MainActivity extends FragmentActivity {
         eventListView.setAdapter(adapter);
         instance = this;
 
-        //****************************DATE FORMAT**********************
-        /*Date today = Calendar.getInstance().getTime();
-        DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd");
-        String strToday = dateFormat.format(today);
-        setSelectedDate(strToday);*/
-
-        ReadDatabase(calendarView);
+        calendarView = findViewById(R.id.calendarView);
 
         calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
-            @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
-            public void onSelectedDayChange(CalendarView view, int year, int month, int dayOfMonth) {
+            public void onSelectedDayChange(@NonNull CalendarView view, int year, int month, int dayOfMonth) {
                 eventList.clear();
-                setSelectedDate(Integer.toString(year) + Integer.toString(month) + Integer.toString(dayOfMonth));
-                //setSelectedDate(dateFormat.format(LocalDate.of(year, month+1, dayOfMonth).toString())); //problem with this format; need to be corrected
+                selectedDate = Integer.toString(year) + Integer.toString(month) + Integer.toString(dayOfMonth);
                 ReadDatabase(view);
             }
         });
 
         try{
-            dbCalendar = new MyDB(this, "CalendarDatabase", null, 1); //DB initialisation
+            dbCalendar = new MyDB(this, "CalendarDatabase", null, 1); //initialisation de la BDD
             sqLiteDatabase = dbCalendar.getWritableDatabase();
         }catch(Exception e){
             e.printStackTrace();
         }
 
         //button to join the AddEventActivity
-        ButtonAdd.setOnClickListener(new View.OnClickListener() {
+        ButtonAdd.setOnClickListener(new View.OnClickListener() { //bouton pour aller vers la page AddEventActivity
             @Override
             public void onClick(View v) {
-                Conflit conflit = new Conflit(true);
-                showDialog(); //test de la fonctionnalité de conflit
-                if(conflit.isPb() == false) {
-                    startActivity(new Intent(MainActivity.this, AddEventActivity.class));
-                }
+                startActivity(new Intent(MainActivity.this, AddEventActivity.class));
             }
         });
 
         //button to join AddEventFullDayActivity
-        ButtonAddfullday.setOnClickListener(new View.OnClickListener() {
+        ButtonAddfullday.setOnClickListener(new View.OnClickListener() { //bouton pour aller vers la page AddEventActivity
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(MainActivity.this, AddEventFullDayActivity.class));
@@ -120,11 +113,13 @@ public class MainActivity extends FragmentActivity {
         });
 
         //onclick on an item
-        eventListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        eventListView.setOnItemClickListener(
+                new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                         Intent pop = new Intent(MainActivity.this, Pop.class);
                         eventSelectedDesc = eventList.get(position);
+
                         startActivity(new Intent(MainActivity.this,Pop.class));
                     }
                 }
@@ -133,65 +128,76 @@ public class MainActivity extends FragmentActivity {
 
     //***********************ALERT POPUP DUPLICATE***************************
     void showDialog() {
-        DialogFragment newFragment = AlertDialogFragment.newInstance(R.string.warning_dialog_title);
-        newFragment.show(getSupportFragmentManager(), "Alert");
+        DialogFragment newFragment = AlertDialogFragment.newInstance(
+                R.string.warning_dialog_title);
+
+        final FragmentManager fragmentManager = this.getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.add(newFragment, "Alert").commitAllowingStateLoss();
     }
 
     //************************INSERTION IN THE DB*******************************
-    public void InsertEventDataBase(ContentValues contentValues, String dateToCompare, String nameEventToCompare){
-        //cursor = sqLiteDatabase.rawQuery("Select Date, NameEvent from EventCalendar", null);
+    public void InsertEventDataBase(ContentValues contentValues, String dateToCompare, String nameEventToCompare, String timeToCompare){
+        cursor = sqLiteDatabase.rawQuery("Select Date, NameEvent, DescriptionEvent from EventCalendar", null);
+        cursor.moveToFirst();
 
-        Conflit conflit = new Conflit(true);
-        //showDialog();
-        if(conflit.isPb() == false){
-            sqLiteDatabase.insert("EventCalendar", null, contentValues);
-        }
-        ReadDatabase(calendarView);
+        conflit.setPb(false);
 
-        /*cursor.moveToFirst();
         while(!cursor.isAfterLast()){
-            //String eventNOM = cursor.getString((cursor.getColumnIndex("NameEvent")));
-            if(cursor.getString((cursor.getColumnIndex("Date"))).equals(dateToCompare)&& cursor.getString(1).equals(nameEventToCompare)) {
-                //if (cursor.getString(1).equals(nameEventToCompare)) {
+            String eventNOM = cursor.getString((cursor.getColumnIndex("NameEvent")));
+            if(cursor.getString((cursor.getColumnIndex("Date"))).equals(dateToCompare)) {
+                if (cursor.getString(1).equals(nameEventToCompare) || cursor.getString(2).equals(timeToCompare)) {
                     showDialog();
-                  //  break;
-           }
+                    break;
+                }
+            }
             cursor.moveToNext();
-        }*/
+        }
+
+        //sqLiteDatabase.insert("EventCalendar", null, contentValues);
+        if(conflit.isPb() == false){
+           sqLiteDatabase.insert("EventCalendar", null, contentValues);
+        }
+        
+        eventList.clear();
+        ReadDatabase(calendarView);
     }
 
     //************************READ THE DB*****************************
     public void ReadDatabase(View view){
-        String query = "Select NameEvent, Guest, TimeEvent, FamilyEvent Desc from EventCalendar where Date =" + getSelectedDate();
+
+        String query = "Select NameEvent, Guest, DescriptionEvent, FamilyEvent Desc from EventCalendar where Date =" + selectedDate;
         try{
             cursor = sqLiteDatabase.rawQuery(query, null);
             cursor.moveToFirst(); // faire une boucle pour afficher tout les événements de la journée
 
-            String strTodisplay;
-
             while(!cursor.isAfterLast()){
                 if(cursor.getInt(3)==1){
-                    strTodisplay = (cursor.getString(cursor.getColumnIndex("NameEvent"))
+                    //Family Event
+                    eventList.add(cursor.getString(cursor.getColumnIndex("NameEvent"))
                             + "\n"
-                            + cursor.getString(cursor.getColumnIndex("TimeEvent"))
-                            + "  "
-                            + cursor.getString(cursor.getColumnIndex("Guest"))
-                            //+ cursor.getString(cursor.getColumnIndex("Guest"))
-                            + "Family event");
-                    eventList.add(strTodisplay);
-                }else{
-                    strTodisplay = (cursor.getString(cursor.getColumnIndex("NameEvent"))
                             + " at "
                             + cursor.getString(2)
                             + " : "
-                            + cursor.getString(cursor.getColumnIndex("Guest")));
-                    eventList.add(strTodisplay);
+                            + "Family event"
+                    );
+                }else{
+                    //Personal event
+                    eventList.add(cursor.getString(cursor.getColumnIndex("NameEvent"))
+                                    + "\n"
+                                    + "at "
+                                    + cursor.getString(2)
+                                    + " : "
+                                    + cursor.getString(cursor.getColumnIndex("Guest"))
+                    );
                 }
                 cursor.moveToNext();
             }
             eventListView.setAdapter(adapter);
         }catch (Exception e){
             e.printStackTrace();
+            eventList.add("nothing for the moment"); //si pas d'événement dans la journée alors l'affichage est nothing
+            eventListView.setAdapter(adapter);
         }
     }
 }
