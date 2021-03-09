@@ -22,15 +22,20 @@ public class AlertDialogFragment extends DialogFragment {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder .setMessage(R.string.dialog_continue_insertion)
                 .setTitle(R.string.warning_dialog_title)
-                .setPositiveButton(R.string.yes, (dialog, which) -> {
-                    Conflit.doPositiveClick();
-                    dialog.dismiss();
+                .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        MainActivity.conflit.doPositiveClick();
+                        dialog.dismiss();
+                    }
                 })
-                .setNegativeButton(R.string.no, (dialog, which) -> {
-                    Conflit.doNegativeClick();
-                    dialog.dismiss();
+                .setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        //dialog.cancel();
+                        dialog.dismiss();
+                    }
                 });
-        builder.show();
         //create the alertDialog object and return it
         return builder.create();
     }

@@ -29,7 +29,7 @@ public class MainActivity extends FragmentActivity {
     private static String eventSelectedDesc;
     private static String selectedDate;
 
-    public static Conflit conflit = new Conflit(false);
+    public static Conflit conflit = new Conflit(false, null);
 
     private MyDB dbCalendar;
     private CalendarView calendarView;
@@ -39,6 +39,8 @@ public class MainActivity extends FragmentActivity {
 
     ArrayList<String> eventList=new ArrayList<>();
     ArrayAdapter<String> adapter;
+
+    private int count = 0;
 
     //****************** GETTER et SETTER ********************
     public static String getSelectedDate() {
@@ -113,11 +115,14 @@ public class MainActivity extends FragmentActivity {
 
     //***********************ALERT POPUP DUPLICATE***************************
     void showDialog() {
-        DialogFragment newFragment = AlertDialogFragment.newInstance(R.string.warning_dialog_title);
+        count +=1;
+        if(count==1){
+            DialogFragment newFragment = AlertDialogFragment.newInstance(R.string.warning_dialog_title);
+            final FragmentManager fragmentManager = this.getSupportFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            fragmentTransaction.add(newFragment, "Alert").commitAllowingStateLoss();
+        }
 
-        final FragmentManager fragmentManager = this.getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.add(newFragment, "Alert").commitAllowingStateLoss();
     }
 
     //************************INSERTION IN THE DB*******************************
@@ -125,24 +130,34 @@ public class MainActivity extends FragmentActivity {
         cursor = sqLiteDatabase.rawQuery("Select Date, NameEvent, DescriptionEvent from EventCalendar", null);
         cursor.moveToFirst();
 
-        Conflit.setPb(false);
+        boolean isConflit = false;
 
+        conflit.setPb(true);
+        conflit.setContent(contentValues);
+        count = 0;
         while(!cursor.isAfterLast()){
             String eventNOM = cursor.getString((cursor.getColumnIndex("NameEvent")));
             if(cursor.getString((cursor.getColumnIndex("Date"))).equals(dateToCompare)) {
                 if (cursor.getString(1).equals(nameEventToCompare) || cursor.getString(2).equals(timeToCompare)) {
+
                     showDialog();
+                    isConflit = true;
                     break;
+                }else {
+                    conflit.setPb(false);
                 }
             }
             cursor.moveToNext();
         }
-
-        //sqLiteDatabase.insert("EventCalendar", null, contentValues);
-        if(!conflit.isPb()){
-           sqLiteDatabase.insert("EventCalendar", null, contentValues);
+        if(!isConflit){
+            sqLiteDatabase.insert("EventCalendar", null, contentValues);
+            eventList.clear();
+            ReadDatabase(calendarView);
         }
-        
+    }
+
+    public void InsertWithoutConflit(ContentValues contentValues) {
+        sqLiteDatabase.insert("EventCalendar", null, contentValues);
         eventList.clear();
         ReadDatabase(calendarView);
     }
@@ -153,14 +168,28 @@ public class MainActivity extends FragmentActivity {
         try{
             cursor = sqLiteDatabase.rawQuery(query, null);
             cursor.moveToFirst();
+            String time = "All the day";
+            String people = "Everybody";
 
             while(!cursor.isAfterLast()){
+
+                if(cursor.getString(2)!=null && !cursor.getString(2).isEmpty()){
+                    time = cursor.getString(2);
+                }else{
+                    time = "All the day";
+                }
+                if(cursor.getString(cursor.getColumnIndex("Guest"))!=null && !cursor.getString(cursor.getColumnIndex("Guest")).isEmpty()){
+                    people = cursor.getString(cursor.getColumnIndex("Guest"));
+                }else{
+                    people = "Everybody";
+                }
+
                 if(cursor.getInt(3)==1){
                     //Family Event
                     eventList.add(cursor.getString(cursor.getColumnIndex("NameEvent"))
                             + "\n"
-                            + " at "
-                            + cursor.getString(2)
+                            + "at "
+                            + time
                             + " for "
                             + "Family event"
                     );
@@ -169,9 +198,9 @@ public class MainActivity extends FragmentActivity {
                     eventList.add(cursor.getString(cursor.getColumnIndex("NameEvent"))
                                     + "\n"
                                     + "at "
-                                    + cursor.getString(2)
+                                    + time
                                     + " for "
-                                    + cursor.getString(cursor.getColumnIndex("Guest"))
+                                    + people
                     );
                 }
                 cursor.moveToNext();
