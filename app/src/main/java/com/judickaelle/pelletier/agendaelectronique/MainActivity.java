@@ -31,6 +31,7 @@ public class MainActivity extends FragmentActivity {
 
     public static Conflit conflit = new Conflit(false, null);
 
+
     private MyDB dbCalendar;
     private CalendarView calendarView;
     private ListView eventListView;
@@ -41,6 +42,7 @@ public class MainActivity extends FragmentActivity {
     ArrayAdapter<String> adapter;
 
     private int count = 0;
+    private boolean isConflit;
 
     //****************** GETTER et SETTER ********************
     public static String getSelectedDate() {
@@ -130,26 +132,23 @@ public class MainActivity extends FragmentActivity {
         cursor = sqLiteDatabase.rawQuery("Select Date, NameEvent, DescriptionEvent from EventCalendar", null);
         cursor.moveToFirst();
 
-        boolean isConflit = false;
+        isConflit = false;
 
-        conflit.setPb(true);
         conflit.setContent(contentValues);
         count = 0;
         while(!cursor.isAfterLast()){
             String eventNOM = cursor.getString((cursor.getColumnIndex("NameEvent")));
             if(cursor.getString((cursor.getColumnIndex("Date"))).equals(dateToCompare)) {
                 if (cursor.getString(1).equals(nameEventToCompare) || cursor.getString(2).equals(timeToCompare)) {
-
                     showDialog();
                     isConflit = true;
                     break;
-                }else {
-                    conflit.setPb(false);
                 }
             }
             cursor.moveToNext();
         }
-        if(!isConflit){
+
+        if(isConflit==false){
             sqLiteDatabase.insert("EventCalendar", null, contentValues);
             eventList.clear();
             ReadDatabase(calendarView);

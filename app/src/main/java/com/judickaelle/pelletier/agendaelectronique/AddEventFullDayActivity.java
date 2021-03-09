@@ -42,6 +42,7 @@ public class AddEventFullDayActivity extends AppCompatActivity {
         contentValues.put("Date", getDateEvent());
         contentValues.put("NameEvent", getNameEvent());
         contentValues.put("FamilyEvent", familyEvent);
+        contentValues.put("DescriptionEvent", "all the day");
 
         MainActivity.getInstance().InsertEventDataBase(contentValues,getDateEvent(),getNameEvent(), "NoTime");
 

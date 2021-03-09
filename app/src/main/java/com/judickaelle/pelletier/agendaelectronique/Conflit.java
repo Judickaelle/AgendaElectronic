@@ -9,16 +9,6 @@ public class Conflit {
     private static boolean pb;
     private static ContentValues contentValues;
 
-    public static boolean isPb() {
-        return pb;
-    }
-
-    public static void setPb(boolean pb) {
-        Conflit.pb = pb;
-    }
-
-
-
     public Conflit(boolean p, ContentValues content) {
         pb = p;
         contentValues = content;
@@ -27,10 +17,6 @@ public class Conflit {
     public static void doPositiveClick() {
         pb = false;
         MainActivity.getInstance().InsertWithoutConflit(contentValues);
-    }
-
-    public void doNegativeClick() {
-        pb = true;
     }
 
     public void setContent(ContentValues content) {
