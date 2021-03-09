@@ -171,12 +171,7 @@ public class MainActivity extends FragmentActivity {
             String people = "Everybody";
 
             while(!cursor.isAfterLast()){
-
-                if(cursor.getString(2)!=null && !cursor.getString(2).isEmpty()){
-                    time = cursor.getString(2);
-                }else{
-                    time = "All the day";
-                }
+                time = cursor.getString(2);
                 if(cursor.getString(cursor.getColumnIndex("Guest"))!=null && !cursor.getString(cursor.getColumnIndex("Guest")).isEmpty()){
                     people = cursor.getString(cursor.getColumnIndex("Guest"));
                 }else{
